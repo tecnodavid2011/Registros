@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    HOLA ESTA ES LA PRIMERA VISTA 
+    <form action="." method="POST">{% csrf_token %}
+        <table>
+            {{ form.as_table }}
+        </table>
+        <p><input type="submit" value="Submit"></p>
+    
+
+    VISTA TABLA DE CONTENIDO
+    <div class="card-body table-responsive p-0" style="height: 300px;">
+        <table class="table table-head-fixed text-nowrap">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Nombre</th>
+              <th>Aula</th>
+            </tr>
+          </thead>
+          <tbody>
+          {% if object_list %}                  
+                  {% for tablaaulas in object_list %}                
+            <tr>
+              <td>{{ tablaaulas.id }}</td>
+              <td>{{ tablaaulas.nombre }}</td>
+              <td>{{ tablaaulas.aula }}</td>                      
+                              
+                  {% endfor %}  
+            {% else %}
+              <h1>No hay registros</h1> 
+          {% endif %}
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </form>
+</body>
+</html>

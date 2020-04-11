@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    HOLA ESTA ES LA PRIMERA VISTA 
+    <form action="." method="POST">{% csrf_token %}
+        <table>
+            {{ form.as_table }}
+        </table>
+        <p><input type="submit" value="Submit"></p>
+    </form>
+    
+    VISTA TABLA DE CONTENIDO
+    <div class="card-body table-responsive p-0" style="height: 300px;">
+        <table class="table table-head-fixed text-nowrap">
+          <thead>
+            <tr>
+              <th>N° Registro</th>
+              <th>Nombre</th>
+              <th>Apellido</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+          {% if object_list %}                  
+                  {% for tablaregistros in object_list %}                
+            <tr>
+              <td>{{ tablaregistros.id }}</td>
+              <td>{{ tablaregistros.nombre }}</td>
+              <td>{{ tablaregistros.apellido }}</td>
+              <td>
+                <a class="btn btn-primary" 
+                  href="{% url 'indexedit'  tablaregistros.id %}"
+                  type="submit"> Editar </a>
+                <button a class="btn btn-default" 
+                  href="{% url 'indexedit' tablaregistros.id %}">
+                  Cancelar</button>
+              </td>                   
+                              
+                  {% endfor %}  
+            {% else %}
+              <h1>No hay registros</h1> 
+          {% endif %}
+            </tr>
+          </tbody>
+        </table>
+      </div>
+</body>
+</html>
